@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #ffffff;
+  color: #ff9900;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 420px;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: normal;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.entrada {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+#nuevaTarea {
+  flex: 1;
+  padding: 11px 4px;
+  border: none;
+  border-bottom: 1px solid #aa6000;
+  font-size: 16px;
+  background: transparent;
+  outline: none;
+  color: #333;
+}
+
+#nuevaTarea:focus {
+  border-bottom-color: #ff9900;
+}
+
+#btnAgregar {
+  padding: 10px 18px;
+  border: none;
+  background-color: #ff9900;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+#btnAgregar:hover {
+  background-color: #e68800;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9edee;
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+li .texto {
+  flex: 1;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  user-select: none;
+}
+
+li.completada .texto {
+  text-decoration: line-through;
+  color: #fab7b7;
+}
+
+.btnEliminar {
+  border: none;
+  background: #ff9900;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.btnEliminar:hover {
+  background-color: #e68800;
+}
+
+.mensaje-error {
+  color: #cc0000;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+@media (max-width: 480px) {
+  .entrada {
+    flex-direction: column;
+  }
+
+  #btnAgregar {
+    width: 100%;
+  }
+}
