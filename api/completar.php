@@ -1,7 +1,9 @@
 <?php
-require_once '../config/db.php';
+require_once __DIR__ . '/../auth/auth_check.php';
+require_once __DIR__ . '/../config/db.php';
 
 header('Content-Type: application/json');
+require_auth_api();
 
 $data       = json_decode(file_get_contents('php://input'), true);
 $id         = intval($data['id'] ?? 0);
@@ -14,7 +16,7 @@ if ($id <= 0 || $completada === -1) {
 }
 
 $pdo  = conectar();
-$stmt = $pdo->prepare("UPDATE tareas SET completada = ? WHERE id = ?");
-$stmt->execute([$completada, $id]);
+$stmt = $pdo->prepare("UPDATE tareas SET completada = ? WHERE id = ? AND usuario_id = ?");
+$stmt->execute([$completada, $id, usuario_id()]);
 
 echo json_encode(['success' => true]);

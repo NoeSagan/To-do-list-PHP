@@ -1,8 +1,16 @@
 <?php
-require_once 'config/db.php';
+require_once __DIR__ . '/auth/auth_check.php';
+require_once __DIR__ . '/config/db.php';
 
-$pdo    = conectar();
-$stmt   = $pdo->query("SELECT id, texto, completada FROM tareas ORDER BY created_at ASC");
+require_auth();
+
+$uid    = usuario_id();
+$nombre = usuario_nombre();
+
+$pdo  = conectar();
+$stmt = $pdo->prepare("SELECT id, texto, completada FROM tareas WHERE usuario_id = ? ORDER BY created_at ASC");
+$stmt->execute([$uid]);
+
 $tareas = [];
 while ($row = $stmt->fetch()) {
     $tareas[] = [
@@ -22,7 +30,13 @@ while ($row = $stmt->fetch()) {
 </head>
 <body>
   <main class="contenedor">
-    <h1>Lista de Tareas</h1>
+    <div class="cabecera">
+      <h1>Lista de Tareas</h1>
+      <div class="sesion-info">
+        <span>Hola, <strong><?= $nombre ?></strong></span>
+        <a href="auth/logout.php" class="btn-cerrar">Cerrar sesión</a>
+      </div>
+    </div>
 
     <div class="entrada">
       <input type="text" id="nuevaTarea" placeholder="Escribe una tarea...">
